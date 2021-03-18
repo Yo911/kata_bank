@@ -1,6 +1,6 @@
 # intellij
 *.iml
-.ideal/
+.idea/
 
 # build
 target/
