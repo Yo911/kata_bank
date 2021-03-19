@@ -8,8 +8,7 @@ public class Account {
     private List<AccountStatement> accountStatements = new ArrayList<>();
 
     public void deposite(double depositeAmount) {
-        AccountStatement accountStatement = new AccountStatement(depositeAmount, getActualBalance() + depositeAmount);
-        accountStatements.add(accountStatement);
+        accountStatements.add(new AccountStatement(depositeAmount, getActualBalance() + depositeAmount));
     }
 
     public List<AccountStatement> getAccountStatements() {
@@ -19,5 +18,9 @@ public class Account {
     public double getActualBalance() {
         int sizeStatements = accountStatements.size();
         return sizeStatements == 0 ? 0 : accountStatements.get(sizeStatements - 1).getBalance();
+    }
+
+    public void withdraw(double withdrawAmount) {
+        accountStatements.add(new AccountStatement(-withdrawAmount, getActualBalance() - withdrawAmount));
     }
 }
