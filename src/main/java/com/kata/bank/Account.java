@@ -5,17 +5,19 @@ import java.util.List;
 
 public class Account {
 
+    private List<AccountStatement> accountStatements = new ArrayList<>();
+
     public void deposite(double depositeAmount) {
-
+        AccountStatement accountStatement = new AccountStatement(depositeAmount, getActualBalance() + depositeAmount);
+        accountStatements.add(accountStatement);
     }
 
-    public List<Object> getAccountStatements() {
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.add(1);
-        return objects;
+    public List<AccountStatement> getAccountStatements() {
+        return accountStatements;
     }
 
-    public double getBalance() {
-        return 25.1;
+    public double getActualBalance() {
+        int sizeStatements = accountStatements.size();
+        return sizeStatements == 0 ? 0 : accountStatements.get(sizeStatements - 1).getBalance();
     }
 }
