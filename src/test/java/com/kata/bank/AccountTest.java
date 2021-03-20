@@ -3,6 +3,11 @@ package com.kata.bank;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.mockito.ArgumentMatchers.anyDouble;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.spy;
+
 public class AccountTest {
 
     @Test
@@ -70,5 +75,24 @@ public class AccountTest {
         Assertions.assertEquals(-49, account.getAccountStatements().get(1).getAmount());
         Assertions.assertEquals(1, account.getAccountStatements().get(1).getBalance());
         Assertions.assertEquals(1, account.getActualBalance());
+    }
+
+    @Test
+    void should_print_history() {
+        Account account = spy(new Account());
+
+        AccountStatement statementDeposite = spy(new AccountStatement(50, 50));
+        AccountStatement statementWithdrawal = spy(new AccountStatement(-49, 1));
+        doAnswer(amountDeposite -> account.getAccountStatements().add(statementDeposite))
+                .when(account).deposite(anyDouble());
+        doAnswer(amountWithdraw -> account.getAccountStatements().add(statementWithdrawal)).when(account).withdraw(anyDouble());
+
+        account.deposite(50);
+        account.withdraw(49);
+
+        account.history();
+
+        verify(statementDeposite).print();
+        verify(statementWithdrawal).print();
     }
 }

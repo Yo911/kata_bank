@@ -23,4 +23,8 @@ public class Account {
     public void withdraw(double withdrawAmount) {
         accountStatements.add(new AccountStatement(-withdrawAmount, getActualBalance() - withdrawAmount));
     }
+
+    public void history() {
+        accountStatements.forEach(AccountStatement::print);
+    }
 }
