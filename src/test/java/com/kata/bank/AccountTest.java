@@ -12,21 +12,27 @@ public class AccountTest {
 
     @Test
     void should_deposite_amount_into_account() {
+        // Given
         Account account = new Account();
 
+        // When
         account.deposite(25.1);
 
+        // Then
         Assertions.assertEquals(1, account.getAccountStatements().size());
         Assertions.assertEquals(25.1, account.getActualBalance());
     }
 
     @Test
     void should_deposite_multiple_amount_into_account() {
+        // Given
         Account account = new Account();
 
+        // When
         account.deposite(50);
         account.deposite(100);
 
+        // Then
         Assertions.assertEquals(2, account.getAccountStatements().size());
         Assertions.assertEquals(50, account.getAccountStatements().get(0).getAmount());
         Assertions.assertEquals(50, account.getAccountStatements().get(0).getBalance());
@@ -37,10 +43,13 @@ public class AccountTest {
 
     @Test
     void should_withdraw_amount_into_account() {
+        // Given
         Account account = new Account();
 
+        // When
         account.withdraw(50);
 
+        // Then
         Assertions.assertEquals(1, account.getAccountStatements().size());
         Assertions.assertEquals(-50, account.getAccountStatements().get(0).getAmount());
         Assertions.assertEquals(-50, account.getAccountStatements().get(0).getBalance());
@@ -49,11 +58,14 @@ public class AccountTest {
 
     @Test
     void should_withdraw_multiple_amount_into_account() {
+        // Given
         Account account = new Account();
 
+        // When
         account.withdraw(50);
         account.withdraw(450);
 
+        // Then
         Assertions.assertEquals(2, account.getAccountStatements().size());
         Assertions.assertEquals(-50, account.getAccountStatements().get(0).getAmount());
         Assertions.assertEquals(-50, account.getAccountStatements().get(0).getBalance());
@@ -64,11 +76,14 @@ public class AccountTest {
 
     @Test
     void should_deposite_and_withdraw_amount() {
+        // Given
         Account account = new Account();
 
+        // When
         account.deposite(50);
         account.withdraw(49);
 
+        // Then
         Assertions.assertEquals(2, account.getAccountStatements().size());
         Assertions.assertEquals(50, account.getAccountStatements().get(0).getAmount());
         Assertions.assertEquals(50, account.getAccountStatements().get(0).getBalance());
@@ -79,6 +94,7 @@ public class AccountTest {
 
     @Test
     void should_print_history() {
+        // Given
         Account account = spy(new Account());
 
         AccountStatement statementDeposite = spy(new AccountStatement(50, 50));
@@ -90,8 +106,10 @@ public class AccountTest {
         account.deposite(50);
         account.withdraw(49);
 
+        // When
         account.history();
 
+        // Then
         verify(statementDeposite).print();
         verify(statementWithdrawal).print();
     }
