@@ -59,6 +59,24 @@ public class AccountTest {
     }
 
     @Test
+    void should_throw_exception_when_deposite_negative_amount_into_account() {
+        // Given
+        Account account = new Account();
+
+        // When - Then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> account.withdraw(-50));
+    }
+
+    @Test
+    void should_throw_exception_when_withdraw_negative_amount_into_account() {
+        // Given
+        Account account = new Account();
+
+        // When - Then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> account.withdraw(-50));
+    }
+
+    @Test
     void should_withdraw_multiple_amount_into_account() {
         // Given
         Account account = new Account();
