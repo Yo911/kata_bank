@@ -1,23 +1,23 @@
 package com.kata.bank;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class AccountStatement {
 
-    private final Date date;
+    private final LocalDateTime date;
 
     private final BigDecimal amount;
 
     private final BigDecimal balance;
 
     public AccountStatement(BigDecimal amount, BigDecimal balance) {
-        this.date = new Date();
+        this.date = LocalDateTime.now();
         this.amount = amount;
         this.balance = balance;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
