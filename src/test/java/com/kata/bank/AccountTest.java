@@ -3,6 +3,8 @@ package com.kata.bank;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
@@ -20,7 +22,7 @@ public class AccountTest {
 
         // Then
         Assertions.assertEquals(1, account.getAccountStatements().size());
-        Assertions.assertEquals(25.1, account.getActualBalance());
+        Assertions.assertEquals(new BigDecimal(25.1), account.getActualBalance());
     }
 
     @Test
@@ -34,11 +36,11 @@ public class AccountTest {
 
         // Then
         Assertions.assertEquals(2, account.getAccountStatements().size());
-        Assertions.assertEquals(50, account.getAccountStatements().get(0).getAmount());
-        Assertions.assertEquals(50, account.getAccountStatements().get(0).getBalance());
-        Assertions.assertEquals(100, account.getAccountStatements().get(1).getAmount());
-        Assertions.assertEquals(150, account.getAccountStatements().get(1).getBalance());
-        Assertions.assertEquals(150, account.getActualBalance());
+        Assertions.assertEquals(new BigDecimal(50), account.getAccountStatements().get(0).getAmount());
+        Assertions.assertEquals(new BigDecimal(50), account.getAccountStatements().get(0).getBalance());
+        Assertions.assertEquals(new BigDecimal(100), account.getAccountStatements().get(1).getAmount());
+        Assertions.assertEquals(new BigDecimal(150), account.getAccountStatements().get(1).getBalance());
+        Assertions.assertEquals(new BigDecimal(150), account.getActualBalance());
     }
 
     @Test
@@ -51,9 +53,9 @@ public class AccountTest {
 
         // Then
         Assertions.assertEquals(1, account.getAccountStatements().size());
-        Assertions.assertEquals(-50, account.getAccountStatements().get(0).getAmount());
-        Assertions.assertEquals(-50, account.getAccountStatements().get(0).getBalance());
-        Assertions.assertEquals(-50, account.getActualBalance());
+        Assertions.assertEquals(new BigDecimal(-50), account.getAccountStatements().get(0).getAmount());
+        Assertions.assertEquals(new BigDecimal(-50), account.getAccountStatements().get(0).getBalance());
+        Assertions.assertEquals(new BigDecimal(-50), account.getActualBalance());
     }
 
     @Test
@@ -67,11 +69,11 @@ public class AccountTest {
 
         // Then
         Assertions.assertEquals(2, account.getAccountStatements().size());
-        Assertions.assertEquals(-50, account.getAccountStatements().get(0).getAmount());
-        Assertions.assertEquals(-50, account.getAccountStatements().get(0).getBalance());
-        Assertions.assertEquals(-450, account.getAccountStatements().get(1).getAmount());
-        Assertions.assertEquals(-500, account.getAccountStatements().get(1).getBalance());
-        Assertions.assertEquals(-500, account.getActualBalance());
+        Assertions.assertEquals(new BigDecimal(-50), account.getAccountStatements().get(0).getAmount());
+        Assertions.assertEquals(new BigDecimal(-50), account.getAccountStatements().get(0).getBalance());
+        Assertions.assertEquals(new BigDecimal(-450), account.getAccountStatements().get(1).getAmount());
+        Assertions.assertEquals(new BigDecimal(-500), account.getAccountStatements().get(1).getBalance());
+        Assertions.assertEquals(new BigDecimal(-500), account.getActualBalance());
     }
 
     @Test
@@ -85,11 +87,11 @@ public class AccountTest {
 
         // Then
         Assertions.assertEquals(2, account.getAccountStatements().size());
-        Assertions.assertEquals(50, account.getAccountStatements().get(0).getAmount());
-        Assertions.assertEquals(50, account.getAccountStatements().get(0).getBalance());
-        Assertions.assertEquals(-49, account.getAccountStatements().get(1).getAmount());
-        Assertions.assertEquals(1, account.getAccountStatements().get(1).getBalance());
-        Assertions.assertEquals(1, account.getActualBalance());
+        Assertions.assertEquals(new BigDecimal(50), account.getAccountStatements().get(0).getAmount());
+        Assertions.assertEquals(new BigDecimal(50), account.getAccountStatements().get(0).getBalance());
+        Assertions.assertEquals(new BigDecimal(-49), account.getAccountStatements().get(1).getAmount());
+        Assertions.assertEquals(new BigDecimal(1), account.getAccountStatements().get(1).getBalance());
+        Assertions.assertEquals(new BigDecimal(1), account.getActualBalance());
     }
 
     @Test
@@ -97,8 +99,8 @@ public class AccountTest {
         // Given
         Account account = spy(new Account());
 
-        AccountStatement statementDeposite = spy(new AccountStatement(50, 50));
-        AccountStatement statementWithdrawal = spy(new AccountStatement(-49, 1));
+        AccountStatement statementDeposite = spy(new AccountStatement(new BigDecimal(50), new BigDecimal(50)));
+        AccountStatement statementWithdrawal = spy(new AccountStatement(new BigDecimal(-49), new BigDecimal(1)));
         doAnswer(amountDeposite -> account.getAccountStatements().add(statementDeposite))
                 .when(account).deposite(anyDouble());
         doAnswer(amountWithdraw -> account.getAccountStatements().add(statementWithdrawal)).when(account).withdraw(anyDouble());

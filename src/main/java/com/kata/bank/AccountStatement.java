@@ -1,16 +1,17 @@
 package com.kata.bank;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class AccountStatement {
 
     private final Date date;
 
-    private final double amount;
+    private final BigDecimal amount;
 
-    private final double balance;
+    private final BigDecimal balance;
 
-    public AccountStatement(double amount, double balance) {
+    public AccountStatement(BigDecimal amount, BigDecimal balance) {
         this.date = new Date();
         this.amount = amount;
         this.balance = balance;
@@ -20,11 +21,11 @@ public class AccountStatement {
         return date;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
